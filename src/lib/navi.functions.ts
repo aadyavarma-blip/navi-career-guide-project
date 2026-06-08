@@ -81,11 +81,11 @@ PATHS (only after ≥1 clarify turn, OR when user explicitly asks for paths):
       "difficulty": 1,
       "difficulty_label": "Easy transition",
       "timeline": "6–12 months"
-    },
-    ... (exactly 3 paths)
+    }
   ],
   "closing_note": "1 line nudge — e.g. 'Tap any card to see the 12-week roadmap, or ask for 3 different paths.'"
 }
+- You MUST provide exactly 3 path objects in the "paths" array. DO NOT INCLUDE COMMENTS in the JSON output.
 - difficulty: 1=Easy, 2=Moderate, 3=Bold pivot. difficulty_label must match.
 - NEVER repeat a role from previousRoles list above.
 - Every "why_it_fits" must cite something concrete from the resume.
