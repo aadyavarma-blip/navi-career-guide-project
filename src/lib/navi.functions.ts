@@ -112,9 +112,9 @@ ROADMAP (only when user clicks/selects a specific path):
       "action": "Concrete action they can take",
       "job_to_bookmark": "Real-sounding role/company to bookmark"
     }
-    /* 5–15 blocks depending on timeline above */
   ]
 }
+- Emit between 5 and 15 blocks in the 'weeks' array depending on the timeline above. DO NOT INCLUDE COMMENTS in the JSON output.
 
 CLOSE (after 3 rounds with no selection, OR when user clearly wants to end):
 - Respond ONLY with valid JSON:
@@ -133,7 +133,12 @@ CLOSE (after 3 rounds with no selection, OR when user clearly wants to end):
 }
 
 function tryParseJson(text: string): unknown | null {
-  const trimmed = text.trim().replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim();
+  // Strip markdown formatting
+  let trimmed = text.trim().replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim();
+  
+  // Strip JS-style block comments (/* comment */)
+  trimmed = trimmed.replace(/\/\*[\s\S]*?\*\//g, "");
+  
   if (!trimmed.startsWith("{")) return null;
   try {
     return JSON.parse(trimmed);
