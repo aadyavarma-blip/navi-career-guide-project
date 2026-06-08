@@ -1,0 +1,17 @@
+project_id = "ardtmpvxjtubulzmkshc"
+
+[auth.email.template.magic_link]
+subject = "Your Navi unlock code"
+content_path = "./supabase/templates/magic_link.html"
+
+[auth.email.template.confirmation]
+subject = "Your Navi verification code"
+content_path = "./supabase/templates/email.html"
+
+[auth.email.template.invite]
+subject = "Your Navi verification code"
+content_path = "./supabase/templates/email.html"
+
+[auth.email.template.recovery]
+subject = "Your Navi verification code"
+content_path = "./supabase/templates/email.html"
