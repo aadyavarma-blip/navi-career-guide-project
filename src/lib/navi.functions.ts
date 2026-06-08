@@ -139,9 +139,17 @@ function tryParseJson(text: string): unknown | null {
   // Strip JS-style block comments (/* comment */)
   trimmed = trimmed.replace(/\/\*[\s\S]*?\*\//g, "");
   
-  if (!trimmed.startsWith("{")) return null;
+  const firstBrace = trimmed.indexOf('{');
+  const lastBrace = trimmed.lastIndexOf('}');
+  
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace) {
+    return null;
+  }
+  
+  const jsonStr = trimmed.substring(firstBrace, lastBrace + 1);
+  
   try {
-    return JSON.parse(trimmed);
+    return JSON.parse(jsonStr);
   } catch {
     return null;
   }
