@@ -921,7 +921,7 @@ function PathCardView({ p, onSelect }: { p: PathCard; onSelect: () => void }) {
         <span className="font-medium text-primary">{p.salary_to}</span>
       </div>
       <div className="mb-3 flex flex-wrap gap-1.5">
-        {p.upskills.map((u) => (
+        {(p.upskills || []).map((u) => (
           <span
             key={u}
             className="rounded-full bg-secondary px-2.5 py-0.5 text-xs text-secondary-foreground"
@@ -979,7 +979,7 @@ function RoadmapView({
         <TabsContent value="roadmap" className="mt-4">
           {unlocked ? (
             <ol className="space-y-3">
-              {r.weeks.map((w, i) => (
+              {(r.weeks || []).map((w, i) => (
                 <li
                   key={i}
                   className="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary/40"
@@ -1012,7 +1012,7 @@ function RoadmapView({
                 className="pointer-events-none space-y-3 select-none"
                 style={{ filter: "blur(4px)" }}
               >
-                {r.weeks.slice(0, 4).map((w, i) => (
+                {(r.weeks || []).slice(0, 4).map((w, i) => (
                   <li key={i} className="rounded-xl border border-border bg-card p-4">
                     <div className="mb-1 flex items-center justify-between">
                       <span className="text-xs font-bold uppercase tracking-wider text-primary">
@@ -1072,7 +1072,7 @@ const JOB_BOARDS = [
 ];
 
 function inferRelatedRoles(role: string, weeks: RoadmapWeek[]): string[] {
-  const fromBookmarks = weeks.map((w) => w.job_to_bookmark).filter(Boolean);
+  const fromBookmarks = (weeks || []).map((w) => w.job_to_bookmark).filter(Boolean);
   const seeded = [role, ...fromBookmarks];
   const seen = new Set<string>();
   const out: string[] = [];
